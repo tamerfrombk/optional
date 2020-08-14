@@ -51,6 +51,23 @@ test('map() -- falsy value', () => {
   expect(f).toThrow(Error);
 });
 
+test('flatMap()', () => {
+  const innerOptional = Optional.of('abc');
+  const value = Optional.of(innerOptional)
+    .flatMap((s) => s + ' def')
+    .get();
+
+  expect(value).toBe('abc def');
+});
+
+test('flatMap() -- non optional value', () => {
+  const f = () => {
+    Optional.of('abc').flatMap((s) => s + ' def');
+  };
+
+  expect(f).toThrow(Error);
+});
+
 test('orElse()', () => {
   const value = Optional.of('abc').orElse('else');
 

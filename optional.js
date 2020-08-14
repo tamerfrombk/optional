@@ -73,6 +73,18 @@ export default class Optional {
     return Optional.of(mappedValue);
   }
 
+  flatMap(fn) {
+    if (this.isEmpty()) {
+      return Optional.empty();
+    }
+
+    if (!this.data instanceof Optional) {
+      throw new Error('Data is not an Optional. Consider using map() instead.');
+    }
+
+    return this.data.map(fn);
+  }
+
   filter(fn) {
     if (this.isEmpty()) {
       return Optional.empty();
