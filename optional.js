@@ -55,6 +55,14 @@ export default class Optional {
     return fn(...args);
   }
 
+  orElseThrow(fn) {
+    if (this.isPresent()) {
+      return this.data;
+    }
+
+    throw fn();
+  }
+
   map(fn) {
     if (this.isEmpty()) {
       return Optional.empty();

@@ -75,6 +75,24 @@ test('orElseGet() -- falsy value', () => {
   expect(value).toBe(3);
 });
 
+test('orElseThrow()', () => {
+  const value = Optional.of('abc').orElseThrow(
+    () => new Error('should not throw')
+  );
+
+  expect(value).toBe('abc');
+});
+
+test('orElseThrow() -- falsy value', () => {
+  const f = () => {
+    const value = Optional.ofFalsy(null).orElseThrow(
+      () => new Error('Throw me!')
+    );
+  };
+
+  expect(f).toThrow(Error);
+});
+
 test('filter() -- passing filter', () => {
   const value = Optional.of('abc')
     .filter((s) => s === 'abc')
