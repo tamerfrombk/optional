@@ -31,16 +31,6 @@ export default class Optional {
     return !this.isPresent();
   }
 
-  map(fn) {
-    if (this.isEmpty()) {
-      return Optional.empty();
-    }
-
-    const mappedValue = fn(this.data);
-
-    return Optional.of(mappedValue);
-  }
-
   get() {
     if (this.isEmpty()) {
       throw new Error('get() on empty optional');
@@ -55,5 +45,27 @@ export default class Optional {
     }
 
     return value;
+  }
+
+  map(fn) {
+    if (this.isEmpty()) {
+      return Optional.empty();
+    }
+
+    const mappedValue = fn(this.data);
+
+    return Optional.of(mappedValue);
+  }
+
+  filter(fn) {
+    if (this.isEmpty()) {
+      return Optional.empty();
+    }
+
+    if (fn(this.data)) {
+      return Optional.of(this.data);
+    }
+
+    return Optional.empty();
   }
 }

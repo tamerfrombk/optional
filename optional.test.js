@@ -62,3 +62,27 @@ test('orElse() -- falsy value', () => {
 
   expect(value).toBe('else');
 });
+
+test('filter() -- passing filter', () => {
+  const value = Optional.of('abc')
+    .filter((s) => s === 'abc')
+    .orElse('null');
+
+  expect(value).toBe('abc');
+});
+
+test('filter() -- rejecting filter', () => {
+  const value = Optional.of('abc')
+    .filter((s) => s !== 'abc')
+    .orElse('null');
+
+  expect(value).toBe('null');
+});
+
+test('filter() -- falsy value', () => {
+  const value = Optional.ofFalsy(null)
+    .filter((s) => s === 'abc')
+    .orElse('null');
+
+  expect(value).toBe('null');
+});
