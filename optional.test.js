@@ -32,3 +32,21 @@ test('Constructing Optional from empty()', () => {
   expect(opt.isPresent()).toBe(false);
   expect(opt.isEmpty()).toBe(true);
 });
+
+test('map()', () => {
+  const value = Optional.of('abc')
+    .map((s) => s + ' def')
+    .get();
+
+  expect(value).toBe('abc def');
+});
+
+test('map() -- falsy value', () => {
+  const f = () => {
+    Optional.ofFalsy(null)
+      .map((s) => s + ' def')
+      .get();
+  };
+
+  expect(f).toThrow(Error);
+});
