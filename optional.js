@@ -48,4 +48,12 @@ export default class Optional {
 
     return this.data;
   }
+
+  orElse(value) {
+    if (this.isPresent()) {
+      return this.data;
+    }
+
+    return value;
+  }
 }

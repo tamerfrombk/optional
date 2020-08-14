@@ -50,3 +50,15 @@ test('map() -- falsy value', () => {
 
   expect(f).toThrow(Error);
 });
+
+test('orElse()', () => {
+  const value = Optional.of('abc').orElse('else');
+
+  expect(value).toBe('abc');
+});
+
+test('orElse() -- falsy value', () => {
+  const value = Optional.ofFalsy(null).orElse('else');
+
+  expect(value).toBe('else');
+});
