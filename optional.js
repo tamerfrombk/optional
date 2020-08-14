@@ -18,4 +18,12 @@ export default class Optional {
   static ofFalsy(data) {
     return new Optional(data);
   }
+
+  isPresent() {
+    return !!this.data;
+  }
+
+  isEmpty() {
+    return !this.isPresent();
+  }
 }

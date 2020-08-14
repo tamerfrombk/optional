@@ -1,7 +1,10 @@
 import Optional from './optional';
 
 test('Constructing Optional from of()', () => {
-  expect(Optional.of('xyz')).toBeDefined();
+  const opt = Optional.of('xyz');
+  expect(opt).toBeDefined();
+  expect(opt.isPresent()).toBe(true);
+  expect(opt.isEmpty()).toBe(false);
 });
 
 test('Constructing Optional from of() - Falsy value', () => {
@@ -10,9 +13,15 @@ test('Constructing Optional from of() - Falsy value', () => {
 });
 
 test('Constructing Optional from ofFalsy()', () => {
-  expect(Optional.ofFalsy('abc')).toBeDefined();
+  const opt = Optional.ofFalsy('abc');
+  expect(opt).toBeDefined();
+  expect(opt.isPresent()).toBe(true);
+  expect(opt.isEmpty()).toBe(false);
 });
 
 test('Constructing Optional from ofFalsy() - Falsy value', () => {
-  expect(Optional.ofFalsy(null)).toBeDefined();
+  const opt = Optional.ofFalsy(null);
+  expect(opt).toBeDefined();
+  expect(opt.isPresent()).toBe(false);
+  expect(opt.isEmpty()).toBe(true);
 });
