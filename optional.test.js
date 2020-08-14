@@ -63,6 +63,18 @@ test('orElse() -- falsy value', () => {
   expect(value).toBe('else');
 });
 
+test('orElseGet()', () => {
+  const value = Optional.of('abc').orElseGet(() => 'x');
+
+  expect(value).toBe('abc');
+});
+
+test('orElseGet() -- falsy value', () => {
+  const value = Optional.ofFalsy(null).orElseGet((a, b) => a + b, 1, 2);
+
+  expect(value).toBe(3);
+});
+
 test('filter() -- passing filter', () => {
   const value = Optional.of('abc')
     .filter((s) => s === 'abc')
