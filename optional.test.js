@@ -86,3 +86,13 @@ test('filter() -- falsy value', () => {
 
   expect(value).toBe('null');
 });
+
+test('ifPresent()', () => {
+  const value = {
+    n: 1,
+  };
+
+  Optional.of(value).ifPresent((v) => (v.n = 2));
+
+  expect(value.n).toBe(2);
+});

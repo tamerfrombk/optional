@@ -68,4 +68,12 @@ export default class Optional {
 
     return Optional.empty();
   }
+
+  ifPresent(fn) {
+    if (this.isEmpty()) {
+      return;
+    }
+
+    fn(this.data);
+  }
 }
