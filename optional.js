@@ -19,6 +19,10 @@ export default class Optional {
     return new Optional(data);
   }
 
+  static empty() {
+    return new Optional();
+  }
+
   isPresent() {
     return !!this.data;
   }

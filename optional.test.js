@@ -25,3 +25,10 @@ test('Constructing Optional from ofFalsy() - Falsy value', () => {
   expect(opt.isPresent()).toBe(false);
   expect(opt.isEmpty()).toBe(true);
 });
+
+test('Constructing Optional from empty()', () => {
+  const opt = Optional.empty();
+  expect(opt).toBeDefined();
+  expect(opt.isPresent()).toBe(false);
+  expect(opt.isEmpty()).toBe(true);
+});
