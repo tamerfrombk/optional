@@ -1,4 +1,4 @@
-import Optional from './optional';
+import Optional from '../src/optional';
 
 test('Constructing Optional from of()', () => {
   const opt = Optional.of('xyz');
