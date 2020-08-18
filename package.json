@@ -2,9 +2,13 @@
   "name": "@tamerfrombk/optional",
   "version": "1.0.0",
   "description": "A minimal implementation of an Optional data type mirroring Java 8's optional.",
-  "module": "./src/optional.js",
+  "main": "./dist/src/optional.js",
+  "module": "./src/optional.ts",
+  "types": "./dist/src/optional.d.ts",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "./node_modules/typescript/bin/tsc -p ./tsconfig.json",
+    "clean": "rm -rf ./dist"
   },
   "author": "Tamer Aly <taly.dev75@gmail.com>",
   "license": "LGPL-3.0",
@@ -20,7 +24,10 @@
     "@babel/core": "7.11.1",
     "@babel/node": "7.10.5",
     "@babel/preset-env": "7.11.0",
+    "@babel/preset-typescript": "7.10.4",
     "@babel/register": "7.10.5",
-    "jest": "26.4.0"
+    "@types/jest": "26.0.10",
+    "jest": "26.4.0",
+    "ts-jest": "26.2.0"
   }
 }

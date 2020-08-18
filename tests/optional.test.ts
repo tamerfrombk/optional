@@ -1,4 +1,4 @@
-import Optional from '../src/optional';
+import { Optional } from '../src/optional';
 
 test('Constructing Optional from of()', () => {
   const opt = Optional.of('xyz');
@@ -52,20 +52,19 @@ test('map() -- falsy value', () => {
 });
 
 test('flatMap()', () => {
-  const innerOptional = Optional.of('abc');
-  const value = Optional.of(innerOptional)
-    .flatMap((s) => s + ' def')
-    .get();
+  const value = Optional.of('abc')
+    .flatMap((s) => Optional.of(s + ' def'))
+    .orElse('nope');
 
   expect(value).toBe('abc def');
 });
 
-test('flatMap() -- non optional value', () => {
-  const f = () => {
-    Optional.of('abc').flatMap((s) => s + ' def');
-  };
+test('flatMap() -- falsy value', () => {
+  const value = Optional.ofFalsy('')
+    .flatMap((s) => Optional.of(s + ' def'))
+    .orElse('me');
 
-  expect(f).toThrow(Error);
+  expect(value).toBe('me');
 });
 
 test('orElse()', () => {
@@ -75,7 +74,7 @@ test('orElse()', () => {
 });
 
 test('orElse() -- falsy value', () => {
-  const value = Optional.ofFalsy(null).orElse('else');
+  const value = Optional.ofFalsy('').orElse('else');
 
   expect(value).toBe('else');
 });
@@ -102,9 +101,7 @@ test('orElseThrow()', () => {
 
 test('orElseThrow() -- falsy value', () => {
   const f = () => {
-    const value = Optional.ofFalsy(null).orElseThrow(
-      () => new Error('Throw me!')
-    );
+    Optional.ofFalsy(null).orElseThrow(() => new Error('Throw me!'));
   };
 
   expect(f).toThrow(Error);
@@ -127,9 +124,7 @@ test('filter() -- rejecting filter', () => {
 });
 
 test('filter() -- falsy value', () => {
-  const value = Optional.ofFalsy(null)
-    .filter((s) => s === 'abc')
-    .orElse('null');
+  const value = Optional.ofFalsy('').orElse('null');
 
   expect(value).toBe('null');
 });
