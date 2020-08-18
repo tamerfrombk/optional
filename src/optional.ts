@@ -56,19 +56,11 @@ export class Optional<T> {
   }
 
   orElse(value: T): T {
-    if (this.isPresent()) {
-      return this.data as T;
-    }
-
-    return value;
+    return this.orElseGet(() => value);
   }
 
   orElseGet<U>(fn: Supplier<U>, ...args: any[]): T | U {
-    if (this.isPresent()) {
-      return this.data as T;
-    }
-
-    return fn(...args);
+    return this.isPresent() ? (this.data as T) : fn(...args);
   }
 
   orElseThrow<U>(throwable: Supplier<U>): T {
@@ -80,21 +72,13 @@ export class Optional<T> {
   }
 
   map<U>(fn: Mapper<T, U>): Optional<U> {
-    if (this.isEmpty()) {
-      return Optional.empty();
-    }
-
-    const mappedValue = fn(this.data as T);
-
-    return Optional.of(mappedValue);
+    return this.isPresent()
+      ? Optional.of(fn(this.data as T))
+      : Optional.empty();
   }
 
   flatMap<U>(fn: Mapper<T, Optional<U>>): Optional<U> {
-    if (this.isEmpty()) {
-      return Optional.empty();
-    }
-
-    return fn(this.data as T);
+    return this.isPresent() ? fn(this.data as T) : Optional.empty();
   }
 
   filter(fn: UnaryPredicate<T>): Optional<T> {
@@ -103,18 +87,12 @@ export class Optional<T> {
     }
 
     const typedData = this.data as T;
-    if (fn(typedData)) {
-      return Optional.of(typedData);
-    }
-
-    return Optional.empty();
+    return fn(typedData) ? Optional.of(typedData) : Optional.empty();
   }
 
   ifPresent(fn: Consumer<T>): void {
-    if (this.isEmpty()) {
-      return;
+    if (this.isPresent()) {
+      fn(this.data as T);
     }
-
-    fn(this.data as T);
   }
 }
