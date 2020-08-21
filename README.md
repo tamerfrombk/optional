@@ -82,7 +82,7 @@ import { Optional } from '@tamerfrombk/optional';
 
 class AccountService {
   findById(id: number): Optional<Account> {
-    // implementation
+    return Optional.ofFalsy(/* implementation */);
   }
 }
 ```
@@ -93,20 +93,20 @@ In our client code, if we try to treat the Optional as an `Account`, we'll get a
 import AccountService from './services/AccountService';
 
 function myFunction() {
-  const account = findById(0);
+  const account = AccountService.findById(0);
 
-  const id = account.id(); // compiler error -- no id() method on Optional
+  const balance = account.deposit(100); // compiler error -- no deposit() method on Optional
 }
 ```
 
-The compiler is forcing us to deal with the possibility the `Account` may not exist thanks to the `Optional`. Here's one way of doing it:
+The compiler is forcing us to deal with the possibility the `Account` may not exist thanks to the `Optional` type. Here's one way of handling this possibility:
 
 ```ts
 import AccountService from './services/AccountService';
 
 function myFunction() {
-  const accountId = findById(0)
-    .map((a) => a.id())
+  const balance = AccountService.findById(0)
+    .map((a) => a.deposit(100))
     .orElse(-1);
 }
 ```
