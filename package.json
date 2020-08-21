@@ -20,12 +20,6 @@
     "typescript": "^3.9.7"
   },
   "devDependencies": {
-    "@babel/cli": "7.10.5",
-    "@babel/core": "7.11.1",
-    "@babel/node": "7.10.5",
-    "@babel/preset-env": "7.11.0",
-    "@babel/preset-typescript": "7.10.4",
-    "@babel/register": "7.10.5",
     "@types/jest": "26.0.10",
     "jest": "26.4.0",
     "ts-jest": "26.2.0"
