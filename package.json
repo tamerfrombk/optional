@@ -2,13 +2,13 @@
   "name": "@tamerfrombk/optional",
   "version": "1.0.0",
   "description": "A minimal implementation of an Optional data type mirroring Java 8's optional.",
-  "main": "./dist/src/optional.js",
+  "main": "./src/optional.js",
   "module": "./src/optional.ts",
-  "types": "./dist/src/optional.d.ts",
+  "types": "./src/optional.d.ts",
   "scripts": {
     "test": "jest",
     "build": "./node_modules/typescript/bin/tsc -p ./tsconfig.json",
-    "clean": "rm -rf ./dist"
+    "clean": "rm -rf ./dist package-lock.json"
   },
   "author": "Tamer Aly <taly.dev75@gmail.com>",
   "license": "Apache-2.0",

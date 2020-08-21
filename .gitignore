@@ -22,3 +22,5 @@ node_modules/
 package-lock.json
 npm-debug.log
 dist/
+tests/optional.test.d.ts
+tests/optional.test.js
