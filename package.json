@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A minimal implementation of an Optional data type mirroring Java 8's optional.",
   "main": "./src/optional.js",
-  "module": "./src/optional.ts",
+  "module": "./src/optional.js",
   "types": "./src/optional.d.ts",
   "scripts": {
     "test": "jest",
