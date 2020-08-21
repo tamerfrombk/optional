@@ -189,4 +189,15 @@ export class Optional<T> {
       consumer(this.data as T);
     }
   }
+
+  /**
+   * Returns a JSON object representation of the Optional. The returned object contains a single field:
+   * "value" which describes the value in the Optional. If the Optional is empty, "value" will be "null",
+   * otherwise it will be the value.
+   */
+  json(): Object {
+    return {
+      value: this.data || null,
+    };
+  }
 }

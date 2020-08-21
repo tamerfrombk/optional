@@ -138,3 +138,23 @@ test('ifPresent()', () => {
 
   expect(value.n).toBe(2);
 });
+
+test('json()', () => {
+  const actual = Optional.of('abc').json();
+
+  const expected = {
+    value: 'abc',
+  };
+
+  expect(actual).toStrictEqual(expected);
+});
+
+test('json() -- empty Optional', () => {
+  const actual = Optional.ofFalsy('').json();
+
+  const expected = {
+    value: null,
+  };
+
+  expect(actual).toStrictEqual(expected);
+});

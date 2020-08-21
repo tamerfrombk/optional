@@ -132,6 +132,16 @@ var Optional = /** @class */ (function () {
             consumer(this.data);
         }
     };
+    /**
+     * Returns a JSON object representation of the Optional. The returned object contains a single field:
+     * "value" which describes the value in the Optional. If the Optional is empty, "value" will be "null",
+     * otherwise it will be the value.
+     */
+    Optional.prototype.json = function () {
+        return {
+            value: this.data || null,
+        };
+    };
     return Optional;
 }());
 exports.Optional = Optional;
