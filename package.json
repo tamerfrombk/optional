@@ -6,7 +6,7 @@
   "module": "./src/optional.js",
   "types": "./src/optional.d.ts",
   "scripts": {
-    "test": "jest",
+    "test": "npm run build && jest",
     "build": "./node_modules/typescript/bin/tsc",
     "clean": "rm -rf node_modules/ package-lock.json",
     "lint": "eslint -c .eslintrc.json src/optional.ts tests/optional.test.ts",
