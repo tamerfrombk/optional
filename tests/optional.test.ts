@@ -86,7 +86,7 @@ test('orElseGet()', () => {
 });
 
 test('orElseGet() -- falsy value', () => {
-  const value = Optional.ofFalsy(null).orElseGet((a, b) => a + b, 1, 2);
+  const value = Optional.ofFalsy(null).orElseGet(() => 3);
 
   expect(value).toBe(3);
 });
@@ -131,7 +131,7 @@ test('filter() -- falsy value', () => {
 
 test('ifPresent()', () => {
   const value = {
-    n: 1,
+    n: 1
   };
 
   Optional.of(value).ifPresent((v) => (v.n = 2));
@@ -143,7 +143,7 @@ test('json()', () => {
   const actual = Optional.of('abc').json();
 
   const expected = {
-    value: 'abc',
+    value: 'abc'
   };
 
   expect(actual).toStrictEqual(expected);
@@ -153,7 +153,7 @@ test('json() -- empty Optional', () => {
   const actual = Optional.ofFalsy('').json();
 
   const expected = {
-    value: null,
+    value: null
   };
 
   expect(actual).toStrictEqual(expected);

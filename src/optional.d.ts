@@ -18,12 +18,10 @@ export interface Consumer<T> {
 /**
  * a callable interface describing a function that will supply a value
  *
- * @param args the arguments to the callable
- *
  * @type T - the output type
  */
 export interface Supplier<T> {
-    (...args: any[]): T;
+    (): T;
 }
 /**
  * a callable interface describing a predicate function taking a single input
@@ -34,6 +32,16 @@ export interface Supplier<T> {
  */
 export interface UnaryPredicate<T> {
     (input: T): boolean;
+}
+/**
+ * an interface describing the returned object from the json() method.
+ * The returned object contains a single field: "value" which describes the value in the Optional.
+ * If the Optional is empty, "value" will be "null", otherwise it will be the value.
+ *
+ * @type T the input type
+ */
+export interface JSONOptional<T> {
+    readonly value: T | null;
 }
 /**
  * A type describing a JS "falsy" value
@@ -87,7 +95,7 @@ export declare class Optional<T> {
      * @param supplier the function supplying another value
      * @param args the arguments to the supplier
      */
-    orElseGet<U>(supplier: Supplier<U>, ...args: any[]): T | U;
+    orElseGet<U>(supplier: Supplier<U>): T | U;
     /**
      * Return the contained value, if present, otherwise throw an exception to be created by the provided supplier.
      *
@@ -122,9 +130,7 @@ export declare class Optional<T> {
      */
     ifPresent(consumer: Consumer<T>): void;
     /**
-     * Returns a JSON object representation of the Optional. The returned object contains a single field:
-     * "value" which describes the value in the Optional. If the Optional is empty, "value" will be "null",
-     * otherwise it will be the value.
+     * Returns a JSON object representation of the Optional.
      */
-    json(): Object;
+    json(): JSONOptional<T>;
 }

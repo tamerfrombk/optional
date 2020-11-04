@@ -36,12 +36,10 @@ export interface Consumer<T> {
 /**
  * a callable interface describing a function that will supply a value
  *
- * @param args the arguments to the callable
- *
  * @type T - the output type
  */
 export interface Supplier<T> {
-  (...args: any[]): T;
+  (): T;
 }
 
 /**
@@ -53,6 +51,17 @@ export interface Supplier<T> {
  */
 export interface UnaryPredicate<T> {
   (input: T): boolean;
+}
+
+/**
+ * an interface describing the returned object from the json() method.
+ * The returned object contains a single field: "value" which describes the value in the Optional.
+ * If the Optional is empty, "value" will be "null", otherwise it will be the value.
+ *
+ * @type T the input type
+ */
+export interface JSONOptional<T> {
+  readonly value: T | null
 }
 
 /**
@@ -141,8 +150,8 @@ export class Optional<T> {
    * @param supplier the function supplying another value
    * @param args the arguments to the supplier
    */
-  orElseGet<U>(supplier: Supplier<U>, ...args: any[]): T | U {
-    return this.isPresent() ? (this.data as T) : supplier(...args);
+  orElseGet<U>(supplier: Supplier<U>): T | U {
+    return this.isPresent() ? (this.data as T) : supplier();
   }
 
   /**
@@ -207,13 +216,11 @@ export class Optional<T> {
   }
 
   /**
-   * Returns a JSON object representation of the Optional. The returned object contains a single field:
-   * "value" which describes the value in the Optional. If the Optional is empty, "value" will be "null",
-   * otherwise it will be the value.
+   * Returns a JSON object representation of the Optional.
    */
-  json(): Object {
+  json(): JSONOptional<T> {
     return {
-      value: this.data || null,
+      value: this.data || null
     };
   }
 }

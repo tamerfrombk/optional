@@ -87,11 +87,7 @@ var Optional = /** @class */ (function () {
      * @param args the arguments to the supplier
      */
     Optional.prototype.orElseGet = function (supplier) {
-        var args = [];
-        for (var _i = 1; _i < arguments.length; _i++) {
-            args[_i - 1] = arguments[_i];
-        }
-        return this.isPresent() ? this.data : supplier.apply(void 0, args);
+        return this.isPresent() ? this.data : supplier();
     };
     /**
      * Return the contained value, if present, otherwise throw an exception to be created by the provided supplier.
@@ -148,13 +144,11 @@ var Optional = /** @class */ (function () {
         }
     };
     /**
-     * Returns a JSON object representation of the Optional. The returned object contains a single field:
-     * "value" which describes the value in the Optional. If the Optional is empty, "value" will be "null",
-     * otherwise it will be the value.
+     * Returns a JSON object representation of the Optional.
      */
     Optional.prototype.json = function () {
         return {
-            value: this.data || null,
+            value: this.data || null
         };
     };
     return Optional;
