@@ -14,8 +14,34 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Optional = void 0;
+exports.Optional = exports.NoSuchElementException = void 0;
+/**
+ * This Error is thrown to indicate that the element requested from the Optional is not present.
+ */
+var NoSuchElementException = /** @class */ (function (_super) {
+    __extends(NoSuchElementException, _super);
+    function NoSuchElementException(message) {
+        var _this = _super.call(this, message) || this;
+        _this.name = 'NoSuchElementException';
+        return _this;
+    }
+    return NoSuchElementException;
+}(Error));
+exports.NoSuchElementException = NoSuchElementException;
 var Optional = /** @class */ (function () {
     function Optional(data) {
         if (data === void 0) { data = undefined; }
@@ -24,13 +50,13 @@ var Optional = /** @class */ (function () {
     }
     /**
      * Returns an Optional with the specified present truthy value. If the provided value is falsy,
-     * an Error is thrown. To initialize an Optional with potentially falsy data, use ofFalsy() instead.
+     * a NoSuchElementException is thrown. To initialize an Optional with potentially falsy data, use ofFalsy() instead.
      *
      * @param data the element to initialize the Optional with
      */
     Optional.of = function (data) {
         if (!data) {
-            throw new Error('optional initialized with falsy value -- use ofFalsy() instead');
+            throw new NoSuchElementException('optional initialized with falsy value -- use ofFalsy() instead');
         }
         return new Optional(data);
     };
@@ -61,14 +87,14 @@ var Optional = /** @class */ (function () {
         return !this.isPresent();
     };
     /**
-     * If a value is present in this Optional, returns the value, otherwise throws Error.
+     * If a value is present in this Optional, returns the value, otherwise throws NoSuchElementException.
      * This function should be used sparingly; prefer to use orElse() or orElseGet() to extract
      * Optional values.
      *
      */
     Optional.prototype.get = function () {
         if (this.isEmpty()) {
-            throw new Error('get() on empty optional');
+            throw new NoSuchElementException('get() on empty optional');
         }
         return this.data;
     };

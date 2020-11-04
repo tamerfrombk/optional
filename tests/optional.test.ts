@@ -9,7 +9,7 @@ test('Constructing Optional from of()', () => {
 
 test('Constructing Optional from of() - Falsy value', () => {
   const f = () => Optional.of(null);
-  expect(f).toThrow(Error);
+  expect(f).toThrow();
 });
 
 test('Constructing Optional from ofFalsy()', () => {
@@ -42,13 +42,10 @@ test('map()', () => {
 });
 
 test('map() -- falsy value', () => {
-  const f = () => {
-    Optional.ofFalsy(null)
-      .map((s) => s + ' def')
-      .get();
-  };
+  const value = Optional.ofFalsy(null)
+    .map((s) => s + ' def');
 
-  expect(f).toThrow(Error);
+  expect(value.isEmpty()).toBe(true);
 });
 
 test('flatMap()', () => {

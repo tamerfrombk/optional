@@ -70,6 +70,16 @@ export interface JSONOptional<T> {
  */
 export type Falsy<T> = T | null | undefined;
 
+/**
+ * This Error is thrown to indicate that the element requested from the Optional is not present.
+ */
+export class NoSuchElementException extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'NoSuchElementException';
+  }
+}
+
 export class Optional<T> {
   private constructor(private readonly data: Falsy<T> = undefined) {
     this.data = data;
@@ -77,13 +87,13 @@ export class Optional<T> {
 
   /**
    * Returns an Optional with the specified present truthy value. If the provided value is falsy,
-   * an Error is thrown. To initialize an Optional with potentially falsy data, use ofFalsy() instead.
+   * a NoSuchElementException is thrown. To initialize an Optional with potentially falsy data, use ofFalsy() instead.
    *
    * @param data the element to initialize the Optional with
    */
   static of<T>(data: T): Optional<T> {
     if (!data) {
-      throw new Error(
+      throw new NoSuchElementException(
         'optional initialized with falsy value -- use ofFalsy() instead'
       );
     }
@@ -122,14 +132,14 @@ export class Optional<T> {
   }
 
   /**
-   * If a value is present in this Optional, returns the value, otherwise throws Error.
+   * If a value is present in this Optional, returns the value, otherwise throws NoSuchElementException.
    * This function should be used sparingly; prefer to use orElse() or orElseGet() to extract
    * Optional values.
    *
    */
   get(): T {
     if (this.isEmpty()) {
-      throw new Error('get() on empty optional');
+      throw new NoSuchElementException('get() on empty optional');
     }
 
     return this.data as T;
