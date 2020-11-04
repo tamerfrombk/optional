@@ -8,7 +8,9 @@
   "scripts": {
     "test": "jest",
     "build": "./node_modules/typescript/bin/tsc",
-    "clean": "rm -rf node_modules/ package-lock.json"
+    "clean": "rm -rf node_modules/ package-lock.json",
+    "lint": "eslint -c .eslintrc.json src/optional.ts tests/optional.test.ts",
+    "lint:fix": "eslint --fix -c .eslintrc.json src/optional.ts tests/optional.test.ts"
   },
   "author": "Tamer Aly <taly.dev75@gmail.com>",
   "license": "Apache-2.0",
@@ -17,10 +19,19 @@
     "url": "git+https://github.com/tamerfrombk/optional.git"
   },
   "dependencies": {
-    "typescript": "^3.9.7"
+    "typescript": "3.9.7"
   },
   "devDependencies": {
     "@types/jest": "26.0.10",
+    "@typescript-eslint/eslint-plugin": "4.6.1",
+    "@typescript-eslint/parser": "4.6.1",
+    "eslint": "7.12.1",
+    "eslint-config-prettier": "6.15.0",
+    "eslint-config-standard": "16.0.1",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-prettier": "3.1.4",
+    "eslint-plugin-promise": "4.2.1",
     "jest": "26.4.0",
     "ts-jest": "26.2.0"
   },
