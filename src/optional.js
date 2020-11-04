@@ -170,6 +170,17 @@ var Optional = /** @class */ (function () {
         }
     };
     /**
+     * If a value is present, invoke the specified consumer with the value, otherwise invoke the action.
+     *
+     * @param consumer a consumer function
+     * @param action   a action function
+     */
+    Optional.prototype.ifPresentOrElse = function (consumer, action) {
+        this.isPresent()
+            ? consumer(this.data)
+            : action();
+    };
+    /**
      * Returns a JSON object representation of the Optional.
      */
     Optional.prototype.json = function () {

@@ -24,6 +24,13 @@ export interface Supplier<T> {
     (): T;
 }
 /**
+ * a callable interface describing a function that will perform an action
+ *
+ */
+export interface Action {
+    (): void;
+}
+/**
  * a callable interface describing a predicate function taking a single input
  *
  * @param input the input element
@@ -135,6 +142,13 @@ export declare class Optional<T> {
      * @param consumer a consumer function
      */
     ifPresent(consumer: Consumer<T>): void;
+    /**
+     * If a value is present, invoke the specified consumer with the value, otherwise invoke the action.
+     *
+     * @param consumer a consumer function
+     * @param action   a action function
+     */
+    ifPresentOrElse(consumer: Consumer<T>, action: Action): void;
     /**
      * Returns a JSON object representation of the Optional.
      */

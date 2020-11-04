@@ -1,4 +1,4 @@
-import { Optional } from '../src/optional';
+import { Optional, NoSuchElementException } from '../src/optional';
 
 test('Constructing Optional from of()', () => {
   const opt = Optional.of('xyz');
@@ -132,6 +132,31 @@ test('ifPresent()', () => {
   };
 
   Optional.of(value).ifPresent((v) => (v.n = 2));
+
+  expect(value.n).toBe(2);
+});
+
+test('ifPresentOrElse()', () => {
+  const value = {
+    n: 1
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  const nop = () => {};
+
+  Optional.of(value)
+    .ifPresentOrElse((v) => { v.n = 2; }, nop);
+
+  expect(value.n).toBe(2);
+});
+
+test('ifPresentOrElse() -- empty value', () => {
+  const value = {
+    n: 1
+  };
+
+  Optional.ofFalsy('')
+    .ifPresentOrElse(() => { throw new NoSuchElementException('should not happen'); }, () => { value.n = 2; });
 
   expect(value.n).toBe(2);
 });
