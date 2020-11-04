@@ -161,6 +161,22 @@ test('ifPresentOrElse() -- empty value', () => {
   expect(value.n).toBe(2);
 });
 
+test('or()', () => {
+  const value = Optional.of('abc')
+    .or(() => Optional.of(1))
+    .orElse(-1);
+
+  expect(value).toBe('abc');
+});
+
+test('or() -- falsy value', () => {
+  const value = Optional.ofFalsy('')
+    .or(() => Optional.of(1))
+    .orElse(-1);
+
+  expect(value).toBe(1);
+});
+
 test('json()', () => {
   const actual = Optional.of('abc').json();
 

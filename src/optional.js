@@ -181,6 +181,17 @@ var Optional = /** @class */ (function () {
             : action();
     };
     /**
+     * If a value is present, returns an Optional describing the value, otherwise returns an Optional produced by the
+     * supplying function.
+     *
+     * @param supplier the supplier function
+     */
+    Optional.prototype.or = function (supplier) {
+        return this.isPresent()
+            ? Optional.ofFalsy(this.data)
+            : supplier();
+    };
+    /**
      * Returns a JSON object representation of the Optional.
      */
     Optional.prototype.json = function () {

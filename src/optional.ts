@@ -246,6 +246,18 @@ export class Optional<T> {
   }
 
   /**
+   * If a value is present, returns an Optional describing the value, otherwise returns an Optional produced by the
+   * supplying function.
+   *
+   * @param supplier the supplier function
+   */
+  or<U>(supplier: Supplier<Optional<U>>): Optional<T | U> {
+    return this.isPresent()
+      ? Optional.ofFalsy(this.data)
+      : supplier();
+  }
+
+  /**
    * Returns a JSON object representation of the Optional.
    */
   json(): JSONOptional<T> {
