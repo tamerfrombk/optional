@@ -1,7 +1,7 @@
 {
   "name": "@tamerfrombk/optional",
   "version": "1.0.7",
-  "description": "A minimal implementation of an Optional data type mirroring Java 8's optional.",
+  "description": "A minimal implementation of an Optional data type mirroring Java 11's optional.",
   "main": "./src/optional.js",
   "module": "./src/optional.js",
   "types": "./src/optional.d.ts",

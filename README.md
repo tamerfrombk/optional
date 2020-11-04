@@ -1,6 +1,6 @@
 # Optional
 
-A minimal implementation of an Optional data type mirroring Java 8's optional.
+A minimal implementation of an Optional data type mirroring Java 11's optional.
 
 ## Quickstart
 
